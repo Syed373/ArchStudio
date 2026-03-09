@@ -1,0 +1,56 @@
+<div class="page-container">
+  <div class="page-header clients-header">
+    <div><h1>Clients</h1><p class="subtitle">{{clients.length}} total clients</p></div>
+    <button class="btn-primary" (click)="openModal()"><span class="material-symbols-outlined">add</span> Add Client</button>
+  </div>
+
+  <div class="search-container">
+    <span class="material-symbols-outlined search-icon">search</span>
+    <input type="text" class="search-input" placeholder="Search clients...">
+  </div>
+
+  <div class="clients-grid">
+    <div class="client-card" *ngFor="let c of clients">
+      <div class="card-header">
+        <div class="avatar-sm bg-teal-light">{{c.initials}}</div>
+        <span class="badge" [ngClass]="{'badge-active': c.status==='active', 'badge-prospect': c.status==='prospect', 'badge-inactive': c.status==='inactive'}">{{c.status}}</span>
+      </div>
+      <div class="card-body">
+        <h3 class="client-name">{{c.name}}</h3>
+        <p class="client-meta">{{c.company}} · {{c.projectType}}</p>
+        <div class="client-contact">
+          <p><span class="material-symbols-outlined icon-sm">mail</span> {{c.email}}</p>
+          <p><span class="material-symbols-outlined icon-sm">call</span> {{c.phone}}</p>
+        </div>
+      </div>
+      <div class="card-footer"><button class="btn-text-danger">Remove</button></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>New Client</h2>
+        <button class="close-btn" (click)="closeModal()">&times;</button>
+      </div>
+      <form (ngSubmit)="submitClient()">
+        <div class="form-grid">
+          <div class="form-group"><label>Name *</label><input type="text" name="name" [(ngModel)]="newClient.name" class="form-control" required></div>
+          <div class="form-group"><label>Email *</label><input type="email" name="email"[(ngModel)]="newClient.email" class="form-control" required></div>
+          <div class="form-group"><label>Phone</label><input type="text" name="phone" [(ngModel)]="newClient.phone" class="form-control"></div>
+          <div class="form-group"><label>Company</label><input type="text" name="company" [(ngModel)]="newClient.company" class="form-control"></div>
+          <div class="form-group"><label>Project Type</label><input type="text" name="projectType" [(ngModel)]="newClient.projectType" class="form-control"></div>
+          <div class="form-group">
+            <label>Status</label>
+            <select name="status" [(ngModel)]="newClient.status" class="form-control">
+              <option value="active">Active</option>
+              <option value="prospect">Prospect</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">Add Client</button>
+      </form>
+    </div>
+  </div>
+</div>

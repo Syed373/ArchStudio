@@ -1,5 +1,36 @@
+<div class="app-layout">
 
-<app-create-client></app-create-client>
-<app-create-meeting></app-create-meeting>
+    <aside class="sidebar">
+        <div class="brand">
+            <h2>ArchStudio</h2>
+            <p>Client Management</p>
+        </div>
 
-<router-outlet />
+        <nav class="nav-menu">
+            <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+                <span class="material-symbols-outlined">grid_view</span> Dashboard
+            </a>
+            <a routerLink="/clients" routerLinkActive="active" class="nav-item">
+                <span class="material-symbols-outlined">group</span> Clients
+            </a>
+            <a routerLink="/meetings" routerLinkActive="active" class="nav-item">
+                <span class="material-symbols-outlined">calendar_today</span> Meetings
+            </a>
+            <a routerLink="/tasks" routerLinkActive="active" class="nav-item">
+                <span class="material-symbols-outlined">task_alt</span> Tasks
+            </a>
+        </nav>
+
+        <div class="user-profile">
+            <div class="avatar">A</div>
+            <div class="user-info">
+                <h4>Umair</h4>
+                <p>Architect</p>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <router-outlet />
+    </main>
+</div>

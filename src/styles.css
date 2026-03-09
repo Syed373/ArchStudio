@@ -1,1 +1,69 @@
-/* You can add global styles to this file, and also import other style files */
+
+:root {
+  --sidebar-bg: #1a1e26;
+  --sidebar-text: #a0aec0;
+  --sidebar-hover: #2d3748;
+  --sidebar-active-bg: #262f3d;
+  --sidebar-active-text: #59a693;
+  
+  --bg-light: #f8f9fa;
+  --text-main: #1a202c;
+  --text-muted: #718096;
+  
+  --teal-main: #458373;
+  --orange-main: #d37d40;
+  --card-bg: #ffffff;
+  --border-light: #edf2f7;
+  
+  --badge-high: #e53e3e;
+  --badge-medium: #458373;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-main);
+  height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--text-main);
+}
+
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: white; padding: 32px; border-radius: 12px;
+  width: 100%; max-width: 500px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.modal-header {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
+}
+.modal-header h2 { font-family: 'Playfair Display', serif; font-size: 24px; }
+.close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-muted); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group label { font-size: 14px; color: var(--text-main); }
+.form-control {
+  padding: 10px 12px; border: 1px solid var(--border-light); border-radius: 8px;
+  font-family: 'Inter', sans-serif; font-size: 14px; width: 100%; outline: none;
+}
+.form-control:focus { border-color: var(--teal-main); }
+textarea.form-control { resize: vertical; min-height: 80px; }
+.full-width { grid-column: 1 / -1; }
+.btn-submit {
+  width: 100%; padding: 12px; background-color: var(--teal-main);
+  color: white; border: none; border-radius: 8px; font-weight: 500; font-size: 15px; cursor: pointer; margin-top: 16px;
+}
+.btn-submit:hover { background-color: #366b5d; }
