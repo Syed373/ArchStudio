@@ -1,0 +1,29 @@
+.form-container {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+input[type=text], input[type=email], input[type=password], input[type=number], input[type=datetime-local] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+.registerbtn {
+  background-color: #f1f1f1;
+  color: black;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-weight: bold;
+}
+.registerbtn:hover {
+  background-color: #ddd;
+}
