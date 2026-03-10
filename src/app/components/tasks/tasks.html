@@ -1,126 +1,140 @@
 <div class="page-container">
-    <div class="page-header tasks-header">
-        <div>
-            <h1>Tasks</h1>
-            <p class="subtitle">6 total tasks</p>
+  <div class="page-header tasks-header">
+    <div>
+      <h1>Tasks</h1>
+      <p class="subtitle">{{tasks.length}} total tasks</p>
+    </div>
+    <button class="btn-primary" (click)="openModal()">
+      <span class="material-symbols-outlined">add</span> New Task
+    </button>
+  </div>
+
+  <div class="kanban-board">
+
+    <div class="kanban-column">
+      <div class="column-header">
+        <h3>To Do ({{getTasksByStatus('To Do').length}})</h3>
+      </div>
+
+      <div class="task-card" *ngFor="let t of getTasksByStatus('To Do')">
+        <div class="card-header">
+          <h4>{{t.title}}</h4>
+          <span class="badge"
+            [ngClass]="{'badge-high': t.priority.toLowerCase()==='high', 'badge-medium': t.priority.toLowerCase()==='medium', 'badge-low': t.priority.toLowerCase()==='low'}">{{t.priority}}</span>
         </div>
-        <button class="btn-primary">
-            <span class="material-symbols-outlined">add</span> New Task
-        </button>
+        <div class="card-body">
+          <p class="client-name">{{t.clientName}}</p>
+          <p class="task-desc">{{t.description}}</p>
+        </div>
+        <div class="card-footer">
+          <span class="task-date">{{t.dueDate}}</span>
+          <select class="status-dropdown" [ngModel]="t.status" (change)="changeTaskStatus(t.id, $event)">
+            <option value="To Do">To Do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+          </select>
+        </div>
+      </div>
     </div>
 
-    <div class="kanban-board">
+    <div class="kanban-column">
+      <div class="column-header">
+        <h3>In Progress ({{getTasksByStatus('In Progress').length}})</h3>
+      </div>
 
-        <div class="kanban-column">
-            <div class="column-header">
-                <h3>To Do (3)</h3>
-            </div>
-            <div class="task-card">
-                <div class="card-header">
-                    <h4>Structural Analysis</h4>
-                    <span class="badge badge-high">high</span>
-                </div>
-                <div class="card-body">
-                    <p class="client-name">James Rodriguez</p>
-                    <p class="task-desc">Complete structural analysis for commercial building</p>
-                </div>
-                <div class="card-footer">
-                    <span class="task-date">2026-03-18</span>
-                    <button class="status-dropdown">To Do <span
-                            class="material-symbols-outlined icon-xs">expand_more</span></button>
-                </div>
-            </div>
-
-            <div class="task-card">
-                <div class="card-header">
-                    <h4>Material Selection</h4>
-                    <span class="badge badge-medium">medium</span>
-                </div>
-                <div class="card-body">
-                    <p class="client-name">Sarah Mitchell</p>
-                    <p class="task-desc">Select materials for kitchen and bathroom</p>
-                </div>
-                <div class="card-footer">
-                    <span class="task-date">2026-03-20</span>
-                    <button class="status-dropdown">To Do <span
-                            class="material-symbols-outlined icon-xs">expand_more</span></button>
-                </div>
-            </div>
-
-            <div class="task-card">
-                <div class="card-header">
-                    <h4>Mood Board</h4>
-                    <span class="badge badge-low">low</span>
-                </div>
-                <div class="card-body">
-                    <p class="client-name">Emily Chen</p>
-                    <p class="task-desc">Create mood board for interior design concept</p>
-                </div>
-                <div class="card-footer">
-                    <span class="task-date">2026-03-22</span>
-                    <button class="status-dropdown">To Do <span
-                            class="material-symbols-outlined icon-xs">expand_more</span></button>
-                </div>
-            </div>
+      <div class="task-card" *ngFor="let t of getTasksByStatus('In Progress')">
+        <div class="card-header">
+          <h4>{{t.title}}</h4>
+          <span class="badge"
+            [ngClass]="{'badge-high': t.priority.toLowerCase()==='high', 'badge-medium': t.priority.toLowerCase()==='medium', 'badge-low': t.priority.toLowerCase()==='low'}">{{t.priority}}</span>
         </div>
-
-        <div class="kanban-column">
-            <div class="column-header">
-                <h3>In Progress (2)</h3>
-            </div>
-
-            <div class="task-card">
-                <div class="card-header">
-                    <h4>Floor Plan Draft</h4>
-                    <span class="badge badge-high">high</span>
-                </div>
-                <div class="card-body">
-                    <p class="client-name">Sarah Mitchell</p>
-                    <p class="task-desc">Create initial floor plan for residential project</p>
-                </div>
-                <div class="card-footer">
-                    <span class="task-date">2026-03-14</span>
-                    <button class="status-dropdown">In Progress <span
-                            class="material-symbols-outlined icon-xs">expand_more</span></button>
-                </div>
-            </div>
-            <div class="task-card">
-                <div class="card-header">
-                    <h4>Electrical Layout</h4>
-                    <span class="badge badge-medium">medium</span>
-                </div>
-                <div class="card-body">
-                    <p class="client-name">James Rodriguez</p>
-                    <p class="task-desc">Design electrical layout for all floors</p>
-                </div>
-                <div class="card-footer">
-                    <span class="task-date">2026-03-16</span>
-                    <button class="status-dropdown">In Progress <span
-                            class="material-symbols-outlined icon-xs">expand_more</span></button>
-                </div>
-            </div>
+        <div class="card-body">
+          <p class="client-name">{{t.clientName}}</p>
+          <p class="task-desc">{{t.description}}</p>
         </div>
-
-        <div class="kanban-column">
-            <div class="column-header">
-                <h3>Done (1)</h3>
-            </div>
-            <div class="task-card">
-                <div class="card-header">
-                    <h4>Permit Application</h4>
-                    <span class="badge badge-high">high</span>
-                </div>
-                <div class="card-body">
-                    <p class="client-name">David Park</p>
-                    <p class="task-desc">Submit building permit application</p>
-                </div>
-                <div class="card-footer">
-                    <span class="task-date">2026-03-05</span>
-                    <button class="status-dropdown">Done <span
-                            class="material-symbols-outlined icon-xs">expand_more</span></button>
-                </div>
-            </div>
+        <div class="card-footer">
+          <span class="task-date">{{t.dueDate}}</span>
+          <select class="status-dropdown" [ngModel]="t.status" (change)="changeTaskStatus(t.id, $event)">
+            <option value="To Do">To Do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+          </select>
         </div>
-
+      </div>
     </div>
+
+    <div class="kanban-column">
+      <div class="column-header">
+        <h3>Done ({{getTasksByStatus('Done').length}})</h3>
+      </div>
+
+      <div class="task-card" *ngFor="let t of getTasksByStatus('Done')">
+        <div class="card-header">
+          <h4>{{t.title}}</h4>
+          <span class="badge"
+            [ngClass]="{'badge-high': t.priority.toLowerCase()==='high', 'badge-medium': t.priority.toLowerCase()==='medium', 'badge-low': t.priority.toLowerCase()==='low'}">{{t.priority}}</span>
+        </div>
+        <div class="card-body">
+          <p class="client-name">{{t.clientName}}</p>
+          <p class="task-desc">{{t.description}}</p>
+        </div>
+        <div class="card-footer">
+          <span class="task-date">{{t.dueDate}}</span>
+          <select class="status-dropdown" [ngModel]="t.status" (change)="changeTaskStatus(t.id, $event)">
+            <option value="To Do">To Do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-overlay" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>New Task</h2>
+        <button class="close-btn" (click)="closeModal()">&times;</button>
+      </div>
+      <form (ngSubmit)="submitTask()">
+        <div class="form-grid">
+
+          <div class="form-group full-width">
+            <label>Title *</label>
+            <input type="text" name="title" [(ngModel)]="newTask.title" class="form-control" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Client *</label>
+            <select name="clientName" [(ngModel)]="newTask.clientName" class="form-control" required>
+              <option value="" disabled selected>Select client</option>
+              <option *ngFor="let c of clients" [value]="c.name">{{c.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Description</label>
+            <textarea name="description" [(ngModel)]="newTask.description" class="form-control"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Priority</label>
+            <select name="priority" [(ngModel)]="newTask.priority" class="form-control">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Due Date</label>
+            <input type="date" name="dueDate" [(ngModel)]="newTask.dueDate" class="form-control">
+          </div>
+
+        </div>
+        <button type="submit" class="btn-submit">Create Task</button>
+      </form>
+    </div>
+  </div>
 </div>

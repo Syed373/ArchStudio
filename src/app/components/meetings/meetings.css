@@ -124,9 +124,10 @@
     color: white;
 }
 
-.badge-completed {
-    background-color: #f1f5f9;
-    color: var(--text-muted);
+.badge-completed, .badge-cancelled { 
+  background-color: white; 
+  border: 1px solid var(--border-light);
+  color: var(--text-muted); 
 }
 
 .meeting-actions {

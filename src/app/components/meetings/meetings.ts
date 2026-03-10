@@ -7,8 +7,8 @@ import { DataService, Meeting, Client } from '../../services/data';
   selector: 'app-meetings',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './meetings.component.html',
-  styleUrls: ['./meetings.component.css']
+  templateUrl: './meetings.html',
+  styleUrls: ['./meetings.css']
 })
 export class Meetings implements OnInit {
   meetings: Meeting[] = [];
@@ -31,5 +31,16 @@ export class Meetings implements OnInit {
     this.dataService.addMeeting({ ...this.newMeeting, id: Date.now().toString() });
     this.closeModal();
     this.newMeeting = { title: '', clientName: '', date: '', time: '', location: '', notes: '', status: 'scheduled' };
+  }
+  
+  completeMeeting(id: string) {
+    this.dataService.updateMeetingStatus(id, 'completed');
+  }
+
+  cancelMeeting(id: string) {
+    const confirmCancel = confirm('Are you sure you want to cancel this meeting?');
+    if (confirmCancel) {
+      this.dataService.updateMeetingStatus(id, 'cancelled');
+    }
   }
 }

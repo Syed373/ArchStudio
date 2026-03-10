@@ -6,11 +6,11 @@
 
   <div class="search-container">
     <span class="material-symbols-outlined search-icon">search</span>
-    <input type="text" class="search-input" placeholder="Search clients...">
+    <input type="text" class="search-input" placeholder="Search clients..." [(ngModel)]="searchTerm">
   </div>
 
   <div class="clients-grid">
-    <div class="client-card" *ngFor="let c of clients">
+    <div class="client-card" *ngFor="let c of filteredClients">
       <div class="card-header">
         <div class="avatar-sm bg-teal-light">{{c.initials}}</div>
         <span class="badge" [ngClass]="{'badge-active': c.status==='active', 'badge-prospect': c.status==='prospect', 'badge-inactive': c.status==='inactive'}">{{c.status}}</span>
@@ -23,7 +23,7 @@
           <p><span class="material-symbols-outlined icon-sm">call</span> {{c.phone}}</p>
         </div>
       </div>
-      <div class="card-footer"><button class="btn-text-danger">Remove</button></div>
+      <div class="card-footer"><button class="btn-text-danger" (click)="removeClient(c.id)">Remove</button></div>
     </div>
   </div>
 
